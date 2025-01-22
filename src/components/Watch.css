@@ -37,7 +37,7 @@ body {
     width: calc(81 * var(--unit)) !important;
     height: calc(81 * var(--unit)) !important;
     background-color: rgb(0, 0, 0);
-    border: calc(0.5 * var(--unit)) solid #ffffff;
+    border: 1px solid #ffffff33;
     color: #ffff00;
 }
 
@@ -45,7 +45,7 @@ body {
     width: calc(70 * var(--unit)) !important;
     height: calc(70 * var(--unit)) !important;
     background-color: rgb(0, 0, 0);
-    border: calc(0.5 * var(--unit)) solid white;
+    border: 1px solid #ffffff33;
     color: #fdfb82;
 }
 
@@ -53,7 +53,7 @@ body {
     width: calc(59 * var(--unit)) !important;
     height: calc(59 * var(--unit)) !important;
     background-color: rgb(0, 0, 0);
-    border: calc(0.5 * var(--unit)) solid white;
+    border: 1px solid #ffffff33;
     color: #fff7b1;
 }
 
@@ -61,7 +61,7 @@ body {
     width: calc(48 * var(--unit)) !important;
     height: calc(48 * var(--unit)) !important;
     background-color: rgb(0, 0, 0);
-    border: calc(0.5 * var(--unit)) solid white;
+    border: 1px solid #ffffff33;
     font-size: calc(3 * var(--unit));
     position: relative;
 }
