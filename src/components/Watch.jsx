@@ -14,6 +14,17 @@ const Watch = () => {
     ampm: "",
   });
 
+  const [unit, setUnit] = useState("dvh");
+
+  useEffect(() => {
+    const handleResize = () => {
+      setUnit(window.innerWidth > window.innerHeight ? "dvh" : "vw");
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     const updateClock = () => {
       const now = new Date();
@@ -21,10 +32,7 @@ const Watch = () => {
       const minute = now.getMinutes();
       const second = now.getSeconds();
       const ampm = hour >= 12 ? "PM" : "AM";
-
-      // Convert 24-hour format to 12-hour format
       const formattedHour = hour % 12 || 12;
-
       setTime({
         hour: formattedHour.toString().padStart(2, "0"),
         minute: minute.toString().padStart(2, "0"),
@@ -32,119 +40,76 @@ const Watch = () => {
         ampm,
       });
     };
-
-    // Update the clock immediately and then every second
     updateClock();
     const interval = setInterval(updateClock, 1000);
-
-    return () => clearInterval(interval); // Cleanup interval on component unmount
+    return () => clearInterval(interval);
   }, []);
 
   const calculateSecondAngle = (sec, angleUnit) => {
-    let angle;
-    if (sec * angleUnit >= 90) {
-      angle = parseInt(sec * angleUnit - 90);
-    } else {
-      angle = parseInt(360 - (90 - sec * angleUnit));
-    }
-    return angle;
+    let angle =
+      sec * angleUnit >= 90
+        ? sec * angleUnit - 90
+        : 360 - (90 - sec * angleUnit);
+    return parseInt(angle);
   };
 
   return (
     <div className="parent">
       <div className="digital"></div>
-      <div
-        className="watch second"
-        style={{
-          transform: `rotate(-${calculateSecondAngle(time.second, 6)}deg)`,
-          transition: `${time.second == "15" ? "all 0s" : "all 1s linear"}`,
-        }}
-      >
-        {numbers.map((number) => (
-          <div
-            key={number}
-            className="watch-number"
-            style={{
-              transform: `rotate(${
-                number * 6
-              }deg) translate(0, -37.5vh) rotate(-${number * 6}deg)`,
-            }}
-          >
-            <span
-              className={`${parseInt(time.second) == number && "bold"}`}
+      {["second", "minute", "hour"].map((type, index) => (
+        <div
+          key={type}
+          className={`watch ${type}`}
+          style={{
+            transform: `rotate(-${calculateSecondAngle(
+              time[type],
+              index === 2 ? 30 : 6
+            )}deg)`,
+            transition: `${
+              time[type] == (index === 2 ? "3" : "15")
+                ? "all 0s"
+                : "all 1s linear"
+            }`,
+          }}
+        >
+          {(index === 2 ? hours : numbers).map((number) => (
+            <div
+              key={number}
+              className="watch-number"
               style={{
-                transform: `rotate(${calculateSecondAngle(time.second, 6)}deg)`,
-                transition: `${
-                  time.second == "15" ? "all 0s" : "all 1s linear"
-                }`,
+                transform: `rotate(${
+                  number * (index === 2 ? 30 : 6)
+                }deg) translate(0, -${
+                  index === 2 ? 26.7 : index === 1 ? 32 : 37.5
+                }${unit}) rotate(-${number * (index === 2 ? 30 : 6)}deg)`,
               }}
             >
-              {number<10 && "0"}{number}
-            </span>
-          </div>
-        ))}
-      </div>
-      <div
-        className="watch minute"
-        style={{
-          transform: `rotate(-${calculateSecondAngle(time.minute, 6)}deg)`,
-          transition: `${time.minute == "15" ? "all 0s" : "all 1s linear"}`,
-        }}
-      >
-        {numbers.map((number) => (
-          <div
-            key={number}
-            className="watch-number"
-            style={{
-              transform: `rotate(${
-                number * 6
-              }deg) translate(0, -32vh) rotate(-${number * 6}deg)`,
-              transition: `${time.minute == "15" ? "all 0s" : "all 1s linear"}`,
-            }}
-          >
-            <span
-              className={`${parseInt(time.minute) == number && "bold"}`}
-              style={{
-                transform: `rotate(${calculateSecondAngle(time.minute, 6)}deg)`,
-              }}
-            >
-              {number<10 && "0"}{number}
-            </span>
-          </div>
-        ))}
-      </div>
-      <div
-        className="watch hour"
-        style={{
-          transform: `rotate(-${calculateSecondAngle(time.hour, 30)}deg)`,
-          transition: `${time.hour == "3" ? "all 0s" : "all 1s linear"}`,
-        }}
-      >
-        {hours.map((number) => (
-          <div
-            key={number}
-            className="watch-number"
-            style={{
-              transform: `rotate(${
-                number * 30
-              }deg) translate(0, -26.7vh) rotate(-${number * 30}deg)`,
-              transition: `${time.hour == "3" ? "all 0s" : "all 1s linear"}`,
-            }}
-          >
-            <span
-              className={`${parseInt(time.hour) == number && "bold"}`}
-              style={{
-                transform: `rotate(${calculateSecondAngle(time.hour, 30)}deg)`,
-              }}
-            >
-              {number<10 && "0"}{number}
-            </span>
-          </div>
-        ))}
-      </div>
+              <span
+                className={`${
+                  parseInt(time[type]) == number % (index === 2 ? 12 : 60) &&
+                  "bold"
+                }`}
+                style={{
+                  transform: `rotate(${calculateSecondAngle(
+                    time[type],
+                    index === 2 ? 30 : 6
+                  )}deg)`,
+                  transition: `${
+                    time[type] == (index === 2 ? "3" : "15")
+                      ? "all 0s"
+                      : "all 1s linear"
+                  }`,
+                }}
+              >
+                {number % (index === 2 ? 12 : 60) < 10 && "0"}
+                {number % (index === 2 ? 12 : 60)}
+              </span>
+            </div>
+          ))}
+        </div>
+      ))}
       <div className="watch inside">
-        Unique Clock
-        <i className="fa-solid fa-arrow-right"></i>
+        Unique Clock <i className="fa-solid fa-arrow-right"></i>
       </div>
     </div>
   );
