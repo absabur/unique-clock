@@ -1,0 +1,107 @@
+*{
+    transition: all 1s linear;
+}
+
+body{
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.parent{
+    position: relative;
+    border-radius: 50%;
+    width: 81vh;
+    height: 81vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.second{
+    width: 81vh !important;
+    height: 81vh !important;
+    background-color: rgb(0, 0, 0);
+    border: 4px solid red;
+}
+
+.minute{
+    width: 70vh !important;
+    height: 70vh !important;
+    background-color: rgb(0, 0, 0);
+    border: 4px solid yellow;
+}
+
+.hour{
+    width: 59vh !important;
+    height: 59vh !important;
+    background-color: rgb(0, 0, 0);
+    border: 4px solid green;
+}
+
+.inside{
+    width: 48vh !important;
+    height: 48vh !important;
+    background-color: rgb(0, 0, 0);
+    border: 4px solid blue;
+    font-size: 30px;
+    position: relative;
+}
+
+.inside i{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translate(0, -50%);
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.watch {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  
+  .watch-number {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-origin: 50% 150px;
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.1s;
+  }
+
+/* .digital{
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: translate(0,-50%);
+    font-size: 50px;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+    height: 40px;
+    width: 180px;
+    z-index: 2;
+} */
+
+
+.bold{
+    font-weight: bolder;
+    font-size: 30px;
+    color: rgb(166, 255, 0);
+}
