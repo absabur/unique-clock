@@ -86,7 +86,7 @@ const Watch = () => {
             >
               <span
                 className={`${
-                  parseInt(time[type]) == number % (index === 2 ? 12 : 60) &&
+                  parseInt(time[type]) == number % 60 &&
                   "bold"
                 }`}
                 style={{
@@ -101,8 +101,8 @@ const Watch = () => {
                   }`,
                 }}
               >
-                {number % (index === 2 ? 12 : 60) < 10 && "0"}
-                {number % (index === 2 ? 12 : 60)}
+                {index === 2 ? number < 10 : (number %  60) < 10 && "0"}
+                {index === 2 ? number : number % 60}
               </span>
             </div>
           ))}
