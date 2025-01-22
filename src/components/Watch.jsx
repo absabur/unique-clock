@@ -144,7 +144,7 @@ const Watch = () => {
       </div>
       <div className="watch inside">
         Unique Clock
-        <i class="fa-solid fa-arrow-right"></i>
+        <i className="fa-solid fa-arrow-right"></i>
       </div>
     </div>
   );
