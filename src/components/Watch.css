@@ -24,13 +24,14 @@ body {
 .parent {
     position: relative;
     border-radius: 50%;
-    width: calc(85 * var(--unit));
-    height: calc(85 * var(--unit));
+    width: calc(88 * var(--unit));
+    height: calc(88 * var(--unit));
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #000000;
-    border: calc(1 * var(--unit)) solid #ff0080;
+    border: calc(1 * var(--unit)) solid #ffffff;
+    box-shadow: 10px 10px 50px black;
 }
 
 .second {
@@ -38,7 +39,7 @@ body {
     height: calc(81 * var(--unit)) !important;
     background-color: rgb(0, 0, 0);
     border: 1px solid #ffffff33;
-    color: #ffff00;
+    color: #00f7ff;
 }
 
 .minute {
@@ -46,7 +47,7 @@ body {
     height: calc(70 * var(--unit)) !important;
     background-color: rgb(0, 0, 0);
     border: 1px solid #ffffff33;
-    color: #fdfb82;
+    color: #22b4b9;
 }
 
 .hour {
@@ -54,7 +55,7 @@ body {
     height: calc(59 * var(--unit)) !important;
     background-color: rgb(0, 0, 0);
     border: 1px solid #ffffff33;
-    color: #fff7b1;
+    color: #368285;
 }
 
 .inside {
@@ -103,5 +104,17 @@ body {
 .bold {
     font-weight: bolder;
     font-size: calc(3 * var(--unit));
-    color: #00eeff;
+    color: #ff00b3;
+}
+
+
+.ampm{
+    position: absolute;
+    top: 50%;
+    left: 99%;
+    transform: translate(-80%, -50%);
+    font-size: calc(1 * var(--unit));
+    font-weight: bold;
+    transition: all 0.1s;
+    z-index: 3;
 }

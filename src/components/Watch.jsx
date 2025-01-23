@@ -55,7 +55,7 @@ const Watch = () => {
 
   return (
     <div className="parent">
-      <div className="digital"></div>
+      <div className="ampm">{time.ampm}</div>
       {["second", "minute", "hour"].map((type, index) => (
         <div
           key={type}
