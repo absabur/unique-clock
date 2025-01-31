@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import "./Watch.css"; // Import the CSS file
 
 const Watch = () => {
+  const [render, setRender] = useState(false);
   const numbers = Array.from({ length: 60 }, (_, i) => i + 1);
   const hours = Array.from({ length: 12 }, (_, i) => i + 1);
 
@@ -42,6 +43,7 @@ const Watch = () => {
     };
     updateClock();
     const interval = setInterval(updateClock, 1000);
+    setRender(true)
     return () => clearInterval(interval);
   }, []);
 
@@ -54,7 +56,10 @@ const Watch = () => {
   };
 
   return (
-    <div className="parent">
+    <>
+    {
+      render ? 
+      <div className="parent">
       <div className="ampm">{time.ampm}</div>
       {["second", "minute", "hour"].map((type, index) => (
         <div
@@ -85,10 +90,7 @@ const Watch = () => {
               }}
             >
               <span
-                className={`${
-                  parseInt(time[type]) == number % 60 &&
-                  "bold"
-                }`}
+                className={`${parseInt(time[type]) == number % 60 && "bold"}`}
                 style={{
                   transform: `rotate(${calculateSecondAngle(
                     time[type],
@@ -101,7 +103,7 @@ const Watch = () => {
                   }`,
                 }}
               >
-                {index === 2 ? number < 10 : (number %  60) < 10 && "0"}
+                {index === 2 ? number < 10 : number % 60 < 10 && "0"}
                 {index === 2 ? number : number % 60}
               </span>
             </div>
@@ -111,7 +113,11 @@ const Watch = () => {
       <div className="watch inside">
         Unique Clock <i className="fa-solid fa-arrow-right"></i>
       </div>
-    </div>
+    </div> 
+    :
+    <div className="loading"></div>
+    }
+    </>
   );
 };
 

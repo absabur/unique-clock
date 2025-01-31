@@ -1,11 +1,11 @@
 :root {
-    --unit: 1vw; /* Default unit based on height */
+    --unit: 1vw;
     user-select: none;
 }
 
 @media (orientation: landscape) {
     :root {
-        --unit: 1dvh; /* Switch to width-based units in landscape mode */
+        --unit: 1dvh;
     }
 }
 
@@ -81,7 +81,7 @@ body {
     position: absolute;
     width: 800px;
     height: 800px;
-    border-radius: 50%;
+    border-radius: 100%;
     margin: 10px auto;
     display: flex;
     align-items: center;
@@ -118,3 +118,21 @@ body {
     transition: all 0.1s;
     z-index: 3;
 }
+
+/* .loading{
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    border: 10px solid;
+    border-color: #00f7ff #ff00b3 #00f7ff #00f7ff;
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} */
